@@ -34,9 +34,12 @@ class Stack:
             print("Stack is empty")
 
 
-my_stack = Stack()
-my_stack.push(1)
-my_stack.push(2)
-my_stack.push(3)
+stack = Stack()
+stack.push(1)
+stack.push(2)
+stack.push(3)
 
-my_stack.print_stack()
+stack.print_stack()
+
+stack.pop()
+stack.print_stack()
