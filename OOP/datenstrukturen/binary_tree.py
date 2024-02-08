@@ -186,6 +186,5 @@ bt.add_child(13)
 
 # funktioniert nur für 10, warum?? Auch wenn die Zahl gar nicht erst existiert
 bt.delete(1)
-s
 # print("in-order:")
 # bt.print_in_order()
