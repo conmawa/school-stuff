@@ -12,14 +12,17 @@ class LinkedList:
         self.head = None
         # Nutzer muss beim initialisieren keine Werte angeben,
         # head wird immer None gesetzt.
+        
     def insert_at_start(self, data):
         self.head = Node(data, self.head)
+        
     def print_linked_list(self):
         # current ist Speichervaribale, damit self.head nicht verändert wird
         current = self.head
         while current:
             print(current.data, "-->")
             current = current.nextNode
+            
     def print_linked_list_beaut(self):
         current = self.head
         ll_str = ""
@@ -34,6 +37,22 @@ class LinkedList:
             node = node.nextNode
         node.nextNode = Node(data)
         
+    def search_number(self, data):
+        current = self.head
+        was_found = False
+        
+        while current:
+            if current.data == data:
+                was_found = True
+                break
+            else:
+                current = current.nextNode
+
+        if was_found:
+            print(data, "was found")
+        else:
+            print(data, "was not found")
+            
 ll = LinkedList()
 ll.insert_at_start("Eis")
 ll.insert_at_end("Rum")
@@ -43,3 +62,5 @@ ll.insert_at_end("Minze")
 
 
 ll.print_linked_list_beaut()
+
+ll.search_number("Glas")
