@@ -32,6 +32,18 @@ class Stack:
                 print(item)
         else:
             print("Stack is empty")
+    
+    def search_number(self, data):
+        was_found = False
+        for i in range(len(self.stack)):
+            if self.stack[i] == data:
+                was_found = True
+        
+        if was_found:
+            print(data, "was found")
+        else:
+            print(data, "was not found")
+                
 
 
 stack = Stack()
@@ -43,3 +55,5 @@ stack.print_stack()
 
 stack.pop()
 stack.print_stack()
+
+stack.search_number(3)

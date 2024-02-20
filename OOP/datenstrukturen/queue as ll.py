@@ -25,11 +25,29 @@ class Queue:
         while current:
             print(current.data)
             current = current.nextNode
+    
+    def search_number(self, data):
+        current = self.head
+        was_found = False
+        
+        while current:
+            if current.data == data:
+                was_found = True
+                break
+            else:
+                current = current.nextNode
+
+        if was_found:
+            print(data, "was found")
+        else:
+            print(data, "was not found")
 
 queue = Queue()
-for i in range(1):
+for i in range(10):
     queue.add_element(i)
 queue.print_queue()
 queue.delete()
 queue.delete()
 queue.print_queue()
+
+queue.search_number(10)

@@ -37,6 +37,22 @@ class LinkedList:
             node = node.nextNode
         node.nextNode = Node(data)
         
+    def search_number(self, data):
+        current = self.head
+        was_found = False
+        
+        while current:
+            if current.data == data:
+                was_found = True
+                break
+            else:
+                current = current.nextNode
+
+        if was_found:
+            print(data, "was found")
+        else:
+            print(data, "was not found")
+            
 ll = LinkedList()
 ll.insert_at_start("Eis")
 ll.insert_at_end("Rum")
@@ -46,3 +62,5 @@ ll.insert_at_end("Minze")
 
 
 ll.print_linked_list_beaut()
+
+ll.search_number("Glas")

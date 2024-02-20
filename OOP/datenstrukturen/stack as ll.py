@@ -41,6 +41,22 @@ class Stack:
         while current:
             print(current.data)
             current = current.nextNode
+            
+    def search_number(self, data):
+        current = self.head
+        was_found = False
+        
+        while current:
+            if current.data == data:
+                was_found = True
+                break
+            else:
+                current = current.nextNode
+
+        if was_found:
+            print(data, "was found")
+        else:
+            print(data, "was not found")
         
     
 stack = Stack()
@@ -50,10 +66,9 @@ for i in range(5):
 print("normal stack.")
 stack.print_stack()
 stack.delete()
-stack.delete()
-stack.delete()
-stack.delete()
-stack.delete()
+
 
 print("deleted stack:") 
 stack.print_stack()
+
+stack.search_number(10)

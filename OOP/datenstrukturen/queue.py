@@ -12,14 +12,38 @@ class Queue():
             return self.queue.pop(0)
         else:
             raise IndexError("Queue is empty. Cannot dequeue an empty queue.")
+        
+    def is_empty(self):
+        return len(self.queue) == 0
+        
+    def print_queue(self):
+        if not self.is_empty():
+            print("Queue elements:")
+            for item in reversed(self.queue):
+                print(item)
+        else:
+            print("Queue is empty")
+    
+    def search_number(self, data):
+        was_found = False
+        for i in range(len(self.queue)):
+            if self.queue[i] == data:
+                was_found = True
+        
+        if was_found:
+            print(data, "was found")
+        else:
+            print(data, "was not found")
 
-queue1 = Queue()
-print(queue1.queue)
-queue1.enqueue(39)
-queue1.enqueue(1)
-print(queue1.queue)
+queue = Queue()
 
-queue1.dequeue()
-queue1.dequeue()
-queue1.dequeue()
-print(queue1.queue)
+queue.enqueue(39)
+queue.enqueue(1)
+queue.print_queue()
+
+# queue.dequeue()
+# queue.dequeue()
+# queue.dequeue()
+
+
+queue.search_number(1)
