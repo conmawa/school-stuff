@@ -12,14 +12,17 @@ class LinkedList:
         self.head = None
         # Nutzer muss beim initialisieren keine Werte angeben,
         # head wird immer None gesetzt.
+        
     def insert_at_start(self, data):
         self.head = Node(data, self.head)
+        
     def print_linked_list(self):
         # current ist Speichervaribale, damit self.head nicht verändert wird
         current = self.head
         while current:
             print(current.data, "-->")
             current = current.nextNode
+            
     def print_linked_list_beaut(self):
         current = self.head
         ll_str = ""
