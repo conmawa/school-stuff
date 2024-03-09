@@ -1,27 +1,27 @@
 #include <LiquidCrystal.h>
-LiquidCrystal lcd(12,11,5,4,3,2);
-
+LiquidCrystal lcd(3, 4, 5, 6, 11, 12);
 
 void setup() {
   Serial.begin(9600);
-  lcd.cursor();
-  lcd.begin(16,2);
-  Serial.print("What do you want to send to the arduino?");
+  lcd.begin(16, 2); // Initialize LCD
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  Serial.println("What do you want to send to the Arduino?");
 }
 
-
 void loop() {
-  lcd.blink();
-  lcd.clear();
-
-  String input = Serial.readString();
-  Serial.println(input);
-  lcd.setCursor(0, 0);
-  lcd.autoscroll();
-  for (int i = 0; i < input.length(); i++) {
-    lcd.print(input[i]);
-    delay(150);
+  if (Serial.available()) {
+    lcd.clear(); // Clear the LCD screen
+    lcd.setCursor(0,0);
+    String message = Serial.readString();
+    if (message.length() <= 16) {
+      lcd.print(message); // Print received message
+    } else {
+      // Scroll the text if it exceeds the display width
+      for (int i = 0; i <= message.length() - 16; i++) {
+        lcd.print(message.substring(i, i + 16));
+        delay(500); // Adjust the scrolling speed if needed
+      }
+    }
   }
-  
-  lcd.noAutoscroll();
 }
