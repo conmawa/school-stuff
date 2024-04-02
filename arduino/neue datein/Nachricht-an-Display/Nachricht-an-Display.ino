@@ -10,9 +10,16 @@
   int stringEnd = 0;
   int scrollCursor = screenWidth;
 
+  int green = 8;
+  int red = 9;
+
   void setup() {
     Serial.begin(9600);
     lcd.begin(screenWidth, screenHeight);
+    Serial.println("Whats your Message?");
+    pinMode(green, OUTPUT);
+    pinMode(red, OUTPUT);
+    digitalWrite(red, HIGH);
   }
 
   void loop() {
@@ -21,6 +28,8 @@
 
     while (Serial.available()) {
       String receivedString = Serial.readString(); // Read the incoming byte
+      digitalWrite(green, HIGH);
+      digitalWrite(red, LOW);
 
       // Append the received character to line2
       if (receivedString != '\n' && receivedString != '\r') {
@@ -50,5 +59,4 @@
       stringStart ++;
       stringEnd ++;
     }
-
   }
