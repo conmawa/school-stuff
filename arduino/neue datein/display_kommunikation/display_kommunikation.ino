@@ -1,5 +1,8 @@
 #include <LiquidCrystal.h>
-LiquidCrystal lcd(3, 4, 5, 6, 11, 12);
+#include <SoftwareSerial.h>
+
+SoftwareSerial mySerial(12, 13); // RX, TX
+LiquidCrystal lcd(3, 4, 5, 6, 10, 11);
 
 int screenWidth = 16;
 int screenHeight = 2;
@@ -14,21 +17,33 @@ int red = 9;
 
 void setup() {
   Serial.begin(9600);
+  mySerial.begin(9600);
   lcd.begin(screenWidth, screenHeight);
   Serial.println("Whats your Message?");
   pinMode(green, OUTPUT);
   pinMode(red, OUTPUT);
   digitalWrite(red, HIGH);
+  delay(1000);
 }
 
 void loop() {
   lcd.setCursor(3, 0);
   lcd.print(line1);
 
-  while (Serial.available()) {
-    String receivedString = Serial.readString(); // Read the incoming byte
+  if (Serial.available()) {
+    String outgoingMessage = Serial.readStringUntil('\n');
+    Serial.println("Sending message: " + outgoingMessage);
+    mySerial.println(outgoingMessage);
+  }else{
     digitalWrite(green, HIGH);
     digitalWrite(red, LOW);
+  }
+
+  while (mySerial.available()) {
+    String receivedString = mySerial.readStringUntil('\n'); 
+    Serial.println("Received message: " + receivedString);
+    digitalWrite(green, LOW);
+    digitalWrite(red, HIGH);
     // Append the received character to line2
     if (receivedString != '\n' && receivedString != '\r') {
       line2 = "";
