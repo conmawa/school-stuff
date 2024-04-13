@@ -2,7 +2,7 @@
 #include <SoftwareSerial.h>
 
 SoftwareSerial mySerial(12, 13); // RX, TX
-LiquidCrystal lcd(3, 4, 5, 6, 10, 11);
+LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
 
 int screenWidth = 16;
 int screenHeight = 2;
