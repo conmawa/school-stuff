@@ -28,7 +28,9 @@ def decrypt(word, key):
 def brute_force_decrypt(word):
     for i in range(26):
         string = decrypt(word, i)
-        print(string)
+        print(i, ":", string)
+        if "hello" in string:
+            break
 
 string1 = "Hello, how are you my dear friend?"
 string2 = "mjqqt, mtb fwj dtz rd ijfw kwnjsi?"
