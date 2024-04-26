@@ -29,11 +29,11 @@ def brute_force(word):
 
 
 
-text = "Hello World!"
+text = "Hallihallo, wie gehts wie stehts? Heute ist ja so ein tolles Wetter *hust *hust"
 brute_force(text)
 print(f"Total guesses: {count}")
 
-plt.plot(counts, times, label=text)
+plt.plot(counts, times, label="text")
 plt.grid()
 plt.title("Brute-Force")
 plt.xlabel("Guesses")
