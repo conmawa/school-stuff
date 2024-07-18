@@ -10,7 +10,7 @@ fenster = Tk()
 fenster.title("To-Do-Liste")
 fenster.geometry("410x322")
 fenster.resizable(0,0)
-fenster.iconbitmap("X:\Consi\Programmieren\Python\To-Do-Liste\icon2.ico")
+fenster.iconbitmap("icon2.ico")
 
 #In Datenbank Tabele und Spalten/Reihen festlegen
 cursor.execute("""
