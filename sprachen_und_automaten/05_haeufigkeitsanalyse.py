@@ -3,7 +3,7 @@
 import matplotlib.pyplot as plt
 import io
 
-with io.open("\text.txt", "r", encoding = "utf-8") as file:
+with io.open("text.txt", "r", encoding = "utf-8") as file:
     buchstaben_in_string = []
     buchstaben = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     anzahl = []
