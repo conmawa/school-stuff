@@ -1,74 +1,80 @@
 from tkinter import *
 import sqlite3
+import customtkinter
 
 #Verbindung zur Datenbank
-connection=sqlite3.connect("to_do_liste1.1.db")
-cursor=connection.cursor()
+connection = sqlite3.connect("to-do.db")
+cursor = connection.cursor()
 
-#Konfiguration des Fensters mit Tabelle und Größe
-fenster = Tk()
-fenster.title("To-Do-Liste")
-fenster.geometry("410x322")
-fenster.resizable(0,0)
-fenster.iconbitmap("icon2.ico")
+#Konfiguration des Fensterns mit Tabelle und Größe
+window = customtkinter.CTk()
+window.title("To-Do-Liste")
+window.geometry("600x400")
+window.resizable(1,1)
 
 #In Datenbank Tabele und Spalten/Reihen festlegen
 cursor.execute("""
-    CREATE TABLE IF NOT EXISTS todoliste
-    ('number' INT PRIMARY KEY NOT NULL AUTO INCREMENT,
-    'task' TEXT,
-    'date' DATE);""")
+    CREATE TABLE IF NOT EXISTS todoliste ('task_id' INTEGER PRIMARY KEY AUTOINCREMENT, 'task' TEXT, 'date' DATE)""")
 
 #Werte aus Textfeldern zur Datenbank hinzufügen
-def hinzufügen():
-    task=eingabefeld_task.get()
-    date=eingabe_date.get()
-    cursor.execute('''INSERT INTO todoliste (task, date) VALUES(?,?)''', (task, date
-    eingabefeld_task.delete(0, END)
-    eingabe_date.delete(0, END)
+def add_task():
+    task = input_task.get()
+    date = input_date.get()
+    
+    cursor.execute('''INSERT INTO todoliste (task, date) VALUES(?,?)''', (task, date))
+    
+    input_task.delete(0, END)
+    input_date.delete(0, END)
+    
+    read_database()
 
-def auslesen():
-    cursor.execute('SELECT task, date FROM todoliste')
+def read_database():
+    for widget in window.grid_slaves():
+        if int(widget.grid_info()["row"]) >= 4:
+            widget.destroy()
+            
+    cursor.execute('SELECT task_id, task, date FROM todoliste')
     data = cursor.fetchall()
-    i = 4
-    for element in data:
-        current = Checkbutton(fenster, text = element[0], font('Arial', 12))
-        current.grid(0, i, 3, 2, 12.5, 10)
-        i += 1
+    
+    global checkbuttons 
+    checkbuttons = []
+    
+    for i, (task_id, task, date) in enumerate(data, start = 4):
+        var = IntVar()
+        cb = customtkinter.CTkCheckBox(window, text=f"{task}; fällig bis: {date}", font=('Arial', 14), variable=var)
+        cb.grid(column=1, row=i, padx=2, pady=2, columnspan=3)
+        checkbuttons.append((cb, var, task_id))
 
-def Checkbox_loeschen():
-    if (CB1.get()==1):
-        cursor.execute("DELETE FROM todoliste WHERE number=?", ("1",))
-    if (CB2.get()==1):
-        cursor.execute("DELETE FROM todoliste WHERE number=?", ("2",))
-    if (CB3.get()==1):
-        cursor.execute("DELETE FROM todoliste WHERE number=?", ("3",))
+def delete_task():
+    for cb, var, task_id in checkbuttons:
+        if var.get() == 1:
+            cursor.execute(f"DELETE FROM todoliste WHERE task_id = {task_id}")
+            
+    read_database()
 
 #Buttons und Label festlegen
-Überschrift_label = Label(fenster, text="Meine To-Do-Liste",font=("Arial", 20))
-num_Label= Label(fenster, text="Num.:", font=("Arial", 12, 'italic'))
-task_Label= Label(fenster, text="Aufgabe:", font=("Arial", 12, 'italic'))
-date_Label= Label(fenster, text="Datum:", font=("Arial", 12, 'italic'))
-eingabefeld_task = Entry(fenster, bd=5, width=20)
-eingabe_date= Entry(fenster, bd=5, width=10)
-hinzufügen_Button = Button(fenster, text="Hinzufügen", command=hinzufügen, font=("Arial", 12,"bold"))
-speichern_Button= Button(fenster, text="speichern", command=Checkbox_loeschen, font=("Arial", 12, "bold"))
+title_label = customtkinter.CTkLabel(window, text="Meine To-Do-Liste",font=("Arial", 20))
+blank = customtkinter.CTkLabel(window, text = ' ')
+task_label= customtkinter.CTkLabel(window, text="Aufgabe:", font=("Arial", 16))
+date_label= customtkinter.CTkLabel(window, text="Datum:", font=("Arial", 16))
+input_task = customtkinter.CTkEntry(window, placeholder_text='Aufgabe', width=100, height=10, corner_radius=5, font = ('Arial', 16))
+input_date= customtkinter.CTkEntry(window, placeholder_text='Datum', width=80, height=10, corner_radius=5, font = ('Arial', 16))
+add_btn = customtkinter.CTkButton(window, text="Hinzufügen", command=add_task, font=("Arial", 14))
+delete_btn = customtkinter.CTkButton(window, text="Entfernen", command=delete_task, font=("Arial", 14))
 
 #alle Label und Buttons im Fenster anordnen
-fenster.config() 
-Überschrift_label.grid(column=1, row=0, padx=5, pady=5, columnspan=2)
-num_Label.grid(column=0, row=1,pady=5, padx=5)
-task_Label.grid(column=1, row=1,pady=5, padx=5)
-date_Label.grid(column=2, row=1,pady=5, padx=5)
-eingabefeld_num.grid(column=0, row=2, padx=5, pady=5)
-eingabefeld_task.grid(column=1, row=2, padx=5, pady=5)
-eingabe_date.grid(column=2, row=2, pady=5, padx=5)
-hinzufügen_Button.grid(column=3, row=2, padx=5, pady=5)
-auslesen_Button.grid(column=3, row=1, sticky=W, pady=5, padx=5)
-speichern_Button.grid(column=3, row=8, sticky=W, pady=5, padx=5)
+window.config() 
+title_label.grid(column=1, row=0, padx=5, pady=5, columnspan=2)
+blank.grid(column=0, row=1, pady=5, padx=5)
+task_label.grid(column=1, row=1, pady=5, padx=5)
+date_label.grid(column=2, row=1, pady=5, padx=5)
+input_task.grid(column=1, row=2, padx=5, pady=5)
+input_date.grid(column=2, row=2, pady=5, padx=5)
+add_btn.grid(column=3, row=2, padx=5, pady=5)
+delete_btn.grid(column=4, row=2, sticky=W, pady=5, padx=5)
 
 #Fenster wird immer aktualisiert und Verbindung zur Datenbank wird "geschlossen"
-auslesen()
-fenster.mainloop()
+window.after_idle(read_database)
+window.mainloop()
 connection.commit()
 connection.close()
