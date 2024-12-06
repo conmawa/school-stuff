@@ -1,0 +1,3 @@
+Dies ist ein Beispieltext, um die Häufigkeit von Buchstaben zu zählen.
+Er enthält verschiedene Wörter und Satzzeichen.
+Große und kleine Buchstaben sollen gleich behandelt werden.

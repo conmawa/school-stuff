@@ -1,0 +1,4 @@
+[
+  {"Name": "Lena", "Alter": 22, "Kurse": ["Mathematik", "Informatik"]},
+  {"Name": "Tim", "Alter": 24, "Kurse": ["Physik", "Chemie"]}
+]
