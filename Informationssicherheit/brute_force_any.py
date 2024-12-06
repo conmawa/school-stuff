@@ -15,14 +15,15 @@ def brute_force(word):
     
     while string_array != target_array:
         for i in range(len(target_array)):
-            if string_array[i] != target_array[i]:
-                string_array[i] = chr(randint(0, 256))
-                count += 1
-            end = default_timer()
-            time = end - start
-            counts.append(count)
-            times.append(time)
-            print("".join(string_array))
+            for j in range(256):
+                if string_array[i] != target_array[i]:
+                    string_array[i] = chr(j)
+                    count += 1
+                end = default_timer()
+                time = end - start
+                counts.append(count)
+                times.append(time)
+                print("".join(string_array))
             
     
     
