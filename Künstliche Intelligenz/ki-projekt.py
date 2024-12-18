@@ -27,10 +27,8 @@ def import_image():
     file_path = filedialog.askopenfilename()
     if file_path:
         extracted_text = main(file_path)
-        
-        # Aktualisierung des Text-Widgets mit dem extrahierten Text
-        text_widget.delete(1.0, "end")  # Löscht den vorherigen Text
-        text_widget.insert("end", extracted_text)  # Fügt den neuen Text ein    
+        text_widget.delete(1.0, "end")
+        text_widget.insert("end", extracted_text)
 
 window = ctk.CTk()
 window.title('Texterkennung aus Bildern')
@@ -40,8 +38,6 @@ text_widget = ctk.CTkTextbox(window, width=700, height=400, font=("Arial", 14))
 title_label = ctk.CTkLabel(window, text="Texterkennung aus Bildern",font=("Arial", 20))
 upload_button = ctk.CTkButton(window, text = 'Read image', command = import_image)
 
-
-
 window.config() 
 title_label.grid(column=1, row=0, padx=5, pady=5, columnspan=2)
 upload_button.grid(column = 1, row = 1, pady = 5, padx = 5)
@@ -50,6 +46,3 @@ window.grid_rowconfigure(2, weight=1)
 window.grid_columnconfigure(1, weight=1)
 
 window.mainloop()
-
-#image_path = r"C:\Users\User\Pictures\IMG_20241022_160930.jpg"
-#main(image_path)
