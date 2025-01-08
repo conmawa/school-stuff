@@ -1,20 +1,19 @@
 from tkinter import *
 import sqlite3
-import customtkinter
+import customtkinter as ctk
 
 #Verbindung zur Datenbank
 connection = sqlite3.connect("to-do.db")
 cursor = connection.cursor()
 
 #Konfiguration des Fensterns mit Tabelle und Größe
-window = customtkinter.CTk()
+window = ctk.CTk()
 window.title("To-Do-Liste")
 window.geometry("600x400")
 window.resizable(1,1)
 
 #In Datenbank Tabele und Spalten/Reihen festlegen
-cursor.execute("""
-    CREATE TABLE IF NOT EXISTS todoliste ('task_id' INTEGER PRIMARY KEY AUTOINCREMENT, 'task' TEXT, 'date' DATE)""")
+cursor.execute("""CREATE TABLE IF NOT EXISTS todoliste ('task_id' INTEGER PRIMARY KEY AUTOINCREMENT, 'task' TEXT, 'date' DATE)""")
 
 #Werte aus Textfeldern zur Datenbank hinzufügen
 def add_task():
@@ -41,7 +40,7 @@ def read_database():
     
     for i, (task_id, task, date) in enumerate(data, start = 4):
         var = IntVar()
-        cb = customtkinter.CTkCheckBox(window, text=f"{task}; fällig bis: {date}", font=('Arial', 14), variable=var)
+        cb = ctk.CTkCheckBox(window, text=f"{task}; fällig bis: {date}", font=('Arial', 14), variable=var)
         cb.grid(column=1, row=i, padx=2, pady=2, columnspan=3)
         checkbuttons.append((cb, var, task_id))
 
@@ -53,14 +52,14 @@ def delete_task():
     read_database()
 
 #Buttons und Label festlegen
-title_label = customtkinter.CTkLabel(window, text="Meine To-Do-Liste",font=("Arial", 20))
-blank = customtkinter.CTkLabel(window, text = ' ')
-task_label= customtkinter.CTkLabel(window, text="Aufgabe:", font=("Arial", 16))
-date_label= customtkinter.CTkLabel(window, text="Datum:", font=("Arial", 16))
-input_task = customtkinter.CTkEntry(window, placeholder_text='Aufgabe', width=100, height=10, corner_radius=5, font = ('Arial', 16))
-input_date= customtkinter.CTkEntry(window, placeholder_text='Datum', width=80, height=10, corner_radius=5, font = ('Arial', 16))
-add_btn = customtkinter.CTkButton(window, text="Hinzufügen", command=add_task, font=("Arial", 14))
-delete_btn = customtkinter.CTkButton(window, text="Entfernen", command=delete_task, font=("Arial", 14))
+title_label = ctk.CTkLabel(window, text="Meine To-Do-Liste",font=("Arial", 20))
+blank = ctk.CTkLabel(window, text = ' ')
+task_label= ctk.CTkLabel(window, text="Aufgabe:", font=("Arial", 16))
+date_label= ctk.CTkLabel(window, text="Datum:", font=("Arial", 16))
+input_task = ctk.CTkEntry(window, placeholder_text='Aufgabe', width=100, height=10, corner_radius=5, font = ('Arial', 16))
+input_date= ctk.CTkEntry(window, placeholder_text='Datum', width=80, height=10, corner_radius=5, font = ('Arial', 16))
+add_btn = ctk.CTkButton(window, text="Hinzufügen", command=add_task, font=("Arial", 14))
+delete_btn = ctk.CTkButton(window, text="Entfernen", command=delete_task, font=("Arial", 14))
 
 #alle Label und Buttons im Fenster anordnen
 window.config() 
