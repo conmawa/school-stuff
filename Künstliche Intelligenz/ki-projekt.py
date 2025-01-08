@@ -1,13 +1,15 @@
-""" Anweisungen zum Ausführen
+""" 
+
+Anweisungen zum Ausführen
 
 1. Terminal öffnen
 2. Eingabe: "pip install customtkinter"
 3. Eingabe: "pip install opencv-python"
 4. Folgende Seite besuchen: https://github.com/UB-Mannheim/tesseract/wiki
-5. neusten Installer herunterladen --> speichern --> ausführen --> "Ja" klicken --> Deutsch auswählen --> immer "Weiter" auswählen bis installiert ist
+5. neuesten Installer herunterladen --> speichern --> ausführen --> "Ja" klicken --> Deutsch auswählen --> immer "Weiter" auswählen bis installiert ist (Admin-Rechts benötigt)
 6. Windows-Explorer öffnen --> 'C:' --> 'Programme' --> 'Tesseract-OCR' --> 'tessdata'
-7. Folgende Seite besuchen: https://github.com/tesseract-ocr/tessdata/blob/main/deu.traineddata und herunterladen und in den Pfad bei 6. kopieren (Admin-Rechte benötigt)
-
+7. Folgende Seite besuchen: https://github.com/tesseract-ocr/tessdata/blob/main/deu.traineddata 
+8. Datei von 7. herunterladen und in den Pfad bei 6. kopieren (Admin-Rechte benötigt)
 
 """
 
