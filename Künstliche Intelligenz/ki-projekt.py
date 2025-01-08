@@ -1,3 +1,17 @@
+""" Anweisungen zum Ausführen
+
+1. Terminal öffnen
+2. Eingabe: "pip install customtkinter"
+3. Eingabe: "pip install opencv-python"
+4. Folgende Seite besuchen: https://github.com/UB-Mannheim/tesseract/wiki
+5. neusten Installer herunterladen --> speichern --> ausführen --> "Ja" klicken --> Deutsch auswählen --> immer "Weiter" auswählen bis installiert ist
+6. Windows-Explorer öffnen --> 'C:' --> 'Programme' --> 'Tesseract-OCR' --> 'tessdata'
+7. Folgende Seite besuchen: https://github.com/tesseract-ocr/tessdata/blob/main/deu.traineddata und herunterladen und in den Pfad bei 6. kopieren (Admin-Rechte benötigt)
+
+
+"""
+
+
 # benötigte Bibliotheken importieren
 import pytesseract
 import cv2
@@ -57,11 +71,12 @@ safe_button = ctk.CTkButton(window, text = 'Text speichern', command = lambda:sa
 window.config()
 # vorher definierte Widgets werden in Tabelle angeordnet
 title_label.grid(column = 1, row = 0, padx = 5, pady = 5, columnspan = 2)
-upload_button.grid(column = 1, row = 1, pady = 5, padx = 5)
-safe_button.grid(column = 2, row = 1, pady = 5, padx = 5) 
-text_widget.grid(column = 1, row = 2, pady = 10, padx = 5, columnspan = 2)
+upload_button.grid(column = 1, row = 1, pady = 5, padx = 5, sticky = 'ew')
+safe_button.grid(column = 2, row = 1, pady = 5, padx = 5, sticky = 'ew') 
+text_widget.grid(column = 1, row = 2, pady = 10, padx = 5, columnspan = 2, sticky = 'nsew')
 
-window.grid_rowconfigure(2, weight = 1)
-window.grid_columnconfigure(1, weight = 1)
+window.grid_rowconfigure(2, weight = 1) # Text-Widget passt sich an die Höhe an
+window.grid_columnconfigure(2, weight = 1) # Text-Widget passt sich an die Breite an
+window.grid_columnconfigure(1, weight = 1) # Buttons sind gleichmäßig breit
 
 window.mainloop() # UI wird geöffnet
