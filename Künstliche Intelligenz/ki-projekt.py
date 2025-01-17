@@ -34,19 +34,22 @@ def preprocess_image(image):
     _, threshold_image = cv2.threshold(noise_removed, 120, 255, cv2.THRESH_TOZERO) # Pixelwert wird überprüft, wenn größer 255, wird er auf 0 gesetzt; gibt zwei Werte zurück, nur der zweite ist wichtig
     return threshold_image
 
-def extract_text(image):
-    text = pytesseract.image_to_string(image, lang="deu") # Bild wird in Text umgewandelt; Anpassung der Sprache hier möglich
+def extract_text(image, language):
+    text = pytesseract.image_to_string(image, lang=language) # Bild wird in Text umgewandelt; Anpassung der Sprache hier möglich
     return text
 
-def main(image_path):
-    text = extract_text(preprocess_image(load_image(image_path))) # Text ausgegeben; Funktionen werden nacheinander aufgerufen und geben jeweils Werte wieder
+def main(image_path, language):
+    text = extract_text(preprocess_image(load_image(image_path)), language) # Text ausgegeben; Funktionen werden nacheinander aufgerufen und geben jeweils Werte wieder
     return text
     
 def import_image():
     global extracted_text
     file_path = fd.askopenfilename() # Bild-Pfad wird gespeichert, indem ein Dialogfeld geöffnet wird und das Bild ausgewählt wird
     if file_path:
-        extracted_text = main(file_path) # extrahierter Text aus dem Bild wird gespeichert
+        language = pick_language.get()
+        language.lower()
+        language = language[:3]
+        extracted_text = main(file_path, language) # extrahierter Text aus dem Bild wird gespeichert
         text_widget.delete(1.0, "end") # Textfeld wird geleert
         text_widget.insert("end", extracted_text) # Text wird in Textfeld angezeigt --> Bearbeitung des Textes danach möglich
 
@@ -58,7 +61,13 @@ def safe_text():
         f.close()
     else:
         return 
-    
+
+def set_ui_appearance(event):
+    theme = event.widget.get().lower()
+    print(theme)
+    if theme in ['dark', 'light', 'system']:
+        ctk.set_appearance_mode(theme)
+        
 
 window = ctk.CTk() # Konfiguration für die Benutzeroberfläche (UI)
 window.title('Texterkennung aus Bildern') # Titel festlegen
@@ -69,13 +78,24 @@ text_widget = ctk.CTkTextbox(window, width = 700, height = 400, font = ("Arial",
 title_label = ctk.CTkLabel(window, text = "Texterkennung aus Bildern", font  = ("Arial", 20)) # Titel-Label kreieren
 upload_button = ctk.CTkButton(window, text = 'Bild einlesen', command = lambda:import_image(), font = ("Arial", 20)) # Button, um das Bild auszulesen, Funktion import_image() wird beim Drücken ausgeführt
 safe_button = ctk.CTkButton(window, text = 'Text speichern', command = lambda:safe_text(), font = ("Arial", 20)) # Button, um den Text zu speicher, Funktion safe_text() wird beim Drücken ausgeführt
+pick_language = ctk.CTkComboBox(window, state = 'readonly', values = ['Deutsch', 'English'])
+pick_ui_appearance = ctk.CTkComboBox(window, state = 'readonly', values = ['System', 'Dark', 'Light'])
+
+pick_ui_appearance.set('System')
+pick_language.set('Deutsch')
+
+ctk.set_appearance_mode(pick_ui_appearance.get().lower())
 
 window.config()
 # vorher definierte Widgets werden in Tabelle angeordnet
 title_label.grid(column = 1, row = 0, padx = 5, pady = 5, columnspan = 2)
-upload_button.grid(column = 1, row = 1, pady = 5, padx = 5, sticky = 'ew')
-safe_button.grid(column = 2, row = 1, pady = 5, padx = 5, sticky = 'ew') 
-text_widget.grid(column = 1, row = 2, pady = 10, padx = 5, columnspan = 2, sticky = 'nsew')
+pick_ui_appearance.grid(column = 3, row = 0, padx = 5, pady = 5, sticky = 'ew')
+pick_language.grid(column = 1, row = 1, padx = 5, pady = 5, sticky = 'ew')
+upload_button.grid(column = 2, row = 1, pady = 5, padx = 5, sticky = 'ew')
+safe_button.grid(column = 3, row = 1, pady = 5, padx = 5, sticky = 'ew') 
+text_widget.grid(column = 1, row = 2, pady = 10, padx = 5, columnspan =32, sticky = 'nsew')
+
+pick_ui_appearance.bind('<<ComboboxSelected>>', set_ui_appearance)
 
 window.grid_rowconfigure(2, weight = 1) # Text-Widget passt sich an die Höhe an
 window.grid_columnconfigure(2, weight = 1) # Text-Widget passt sich an die Breite an
