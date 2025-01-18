@@ -1,0 +1,7 @@
+{
+    "python.testing.pytestArgs": [
+        "Künstliche Intelligenz"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
