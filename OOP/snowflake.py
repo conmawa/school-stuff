@@ -1,4 +1,4 @@
-from p5 import *
+import p5
 from random import randint
 
 class Snowflake():
@@ -9,7 +9,7 @@ class Snowflake():
         self.speed = randint(15, 25)
         
     def show(self):
-        circle(self.x_pos, self.y_pos, self.radius)
+        p5.circle(self.x_pos, self.y_pos, self.radius)
     
     def drop(self):
         if self.y_pos < 800:
@@ -23,17 +23,15 @@ def setup():
     global  height, width, snowflakes
     height = 800
     width = 1000
-    size(1000,800)
+    p5.size(1000,800)
     snowflakes = []
     for _ in range(200):
         snowflakes.append(Snowflake())
-        
-    
+
 def draw():
-    background(0)
+    p5.background(0)
     for flake in snowflakes:
         flake.show()
         flake.drop()
-    
 
-run()
+p5.run()
