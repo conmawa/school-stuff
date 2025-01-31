@@ -32,10 +32,11 @@ class LinkedList:
         print(ll_str)
         
     def insert_at_end(self, data):
-        node = self.head
-        while node.nextNode != None:
-            node = node.nextNode
-        node.nextNode = Node(data)
+        if self.head:
+            node = self.head
+            while node.nextNode != None:
+                node = node.nextNode
+            node.nextNode = Node(data)
         
     def search_number(self, data):
         current = self.head

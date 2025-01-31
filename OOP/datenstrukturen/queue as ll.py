@@ -10,15 +10,25 @@ class Queue:
     def __init__(self, head = None):
         self.head = head
     
+    def is_empty(self):
+        if self.head is None:
+            return True
+    
     def add_element(self, data):
-        self.head = Node(data, self.head)
+        if self.is_empty():
+            self.head = Node(data, self.head)
+        else:
+            node = self.head
+            while node.nextNode != None:
+                node = node.nextNode
+            node.nextNode = Node(data)
         
     def delete(self):
-        if self.head:
+        if self.is_empty:
+            print("queue is empty")
+        else:
             self.head = self.head.nextNode
             print("element was deleted")
-        else:
-            print("queue is empty")
         
     def print_queue(self):
         current = self.head
