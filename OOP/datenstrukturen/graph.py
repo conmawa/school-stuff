@@ -65,7 +65,7 @@ for i in range(10):
 
 #gp.bfs(0)
 
-start_node = 0
+start_node = 1
 end_node = 8
 path = gp.find_path(start_node, end_node)
 
