@@ -13,9 +13,10 @@ def even(binaer):
         return True
 
 def positiv(binaer):
-    zahl = list(binaer) # in Liste umwandeln
-    if zahl[0] == '0': # erste Stelle gleich 0?
-        return True # wenn ja, dann positiv
+    return binaet[0] == '0'
+    #zahl = list(binaer) # in Liste umwandeln
+    #if zahl[0] == '0': # erste Stelle gleich 0?
+    #    return True # wenn ja, dann positiv
     
 def add_to_file(zahl):
     with open('Abivorbereitung\menge_c.csv', "w") as file:  # CSV-Datei schreiben
