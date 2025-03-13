@@ -1,7 +1,9 @@
-
+import csv
 def auslesen():
-    with open('meier_01.csv', mode = 'r') as file:
-        lines = file.readlines()
-        print(lines)
+    kaufdaten = []
+    with open('meier_01.csv', newline = '') as file:
+        lines = csv.reader(file, delimiter = ' ', quotechar = ';')
+        for rwo in lines:
+            print(
     
 auslesen()
