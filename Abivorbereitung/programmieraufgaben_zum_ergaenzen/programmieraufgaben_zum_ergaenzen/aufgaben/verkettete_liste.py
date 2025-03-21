@@ -27,8 +27,16 @@ class LinkedList:
                 aktueller = aktueller.next
             aktueller.next = neuer_knoten  # Hänge den neuen Knoten an das Ende
 
-    def pop(self):
+    def pop(self, current=None):
         """Entfernt das letzte Element der Liste."""
+        if current is None:
+            current = self.kopf
+        if current.next is None:
+            self.kopf = None
+            return
+        while current.next.next:
+            current = current.next
+        current.next = None
         # TODO: Implementiere hier die Pop-Logik!
         # Falls die Liste leer ist:
         #     - Rückgabe: None (weil nichts entfernt werden kann)
@@ -58,6 +66,12 @@ liste.append(10)
 liste.append(20)
 liste.append(30)
 liste.display()  # Erwartete Ausgabe: 10 -> 20 -> 30 -> None
+
+liste.pop()
+liste.display()  # Erwartete Ausgabe: 10 -> 20 -> None
+
+liste.pop()
+liste.display()  # Erwartete Ausgabe: 10 -> 20 -> None
 
 liste.pop()
 liste.display()  # Erwartete Ausgabe: 10 -> 20 -> None

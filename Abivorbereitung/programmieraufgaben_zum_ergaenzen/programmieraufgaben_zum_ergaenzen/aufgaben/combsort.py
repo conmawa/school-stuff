@@ -21,6 +21,9 @@ def comb_sort(liste):
 
         i = 0
         while i + gap < len(liste):  # Vergleiche Elemente mit Abstand "gap"
+            if liste[i] > liste[i + gap]:
+                liste[i], liste[i + gap] = liste[i + gap], liste[i]
+                fertig = False
             # TODO: Überprüfe, ob ein Tausch nötig ist
             # Falls liste[i] größer ist als liste[i + gap]:
             #     - Tausche die beiden Elemente

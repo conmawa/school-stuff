@@ -32,9 +32,11 @@ def bucket_sort(liste):
     # 3. Zahlen in Buckets einsortieren
     for zahl in liste:
         index = int((zahl - min_wert) / (max_wert - min_wert) * (anzahl_buckets - 1))
-        buckets[index].append(zahl)
-
+        buckets[index].append(zahl)        
+        
     # 4. Jeden Bucket sortieren (TODO: Hier fehlt die Sortierlogik!)
+    for i in range(anzahl_buckets):
+        buckets[i].sort()
     # Gehe durch jeden Bucket:
     #     - Sortiere den Bucket mit einer einfachen Methode
 

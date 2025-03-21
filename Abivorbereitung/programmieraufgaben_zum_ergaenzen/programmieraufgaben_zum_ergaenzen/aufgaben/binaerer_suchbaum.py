@@ -59,13 +59,20 @@ class BinarySearchTree:
         traverse(self.root)
         print()
 
-    def pre_order_traversal(self):
+    def pre_order_traversal(self, current=None):
         """Pre-Order-Traversierung: Gibt die Werte in Einfügereihenfolge aus (W, L, R)."""
+        if current is None:
+            current = self.root
+        print(current.value, end=" ")
+        if current.left is not None:
+            self.pre_order_traversal(current.left)
+        if current.right is not None:
+            self.pre_order_traversal(current.right)
         # TODO: Implementiere hier die Pre-Order-Traversierung!
         # - Gib den Wert des aktuellen Knotens aus
         # - Gehe rekursiv nach links
         # - Gehe rekursiv nach rechts
-        print()
+        
 
 baum = BinarySearchTree()
 baum.insert(50)

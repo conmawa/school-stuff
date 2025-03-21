@@ -47,7 +47,12 @@ def csv_auswerten(daten):
     summe = 0
     max_wert = None
     anzahl = 0
-
+    
+    for row in daten:
+        summe += row[1]
+        anzahl += 1
+        if max_wert == None or row[1] > max_wert:
+            max_wert = row[1]
     # TODO: Implementiere hier die Berechnungen!
     # - Erstelle eine Liste mit allen Werten aus `daten`
     # - Berechne die Summe aller Werte (`summe = ...`)
@@ -56,7 +61,7 @@ def csv_auswerten(daten):
     # - Finde den größten Wert (`max_wert = ...`)
 
     print(f"Summe der Werte: {summe}")
-    print(f"Durchschnitt: {0:.2f}")  # Hier sollte der berechnete Durchschnitt stehen
+    print(f"Durchschnitt: {summe / anzahl}")  # Hier sollte der berechnete Durchschnitt stehen
     print(f"Größter Wert: {max_wert}")
 
 csv_auswerten(eingelesene_daten)

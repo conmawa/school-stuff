@@ -20,6 +20,14 @@ def merge(linke, rechte):
     ergebnis = []  # Neue Liste für das zusammengeführte Ergebnis
     i, j = 0, 0  # Zeiger für linke und rechte Liste
 
+    while linke and rechte:
+        if linke[i] < rechte[j]:
+            ergebnis.append(linke.pop(0))
+        else:
+            ergebnis.append(rechte.pop(0))
+            
+    if linke or rechte:
+        ergebnis += linke + rechte  
     # TODO: Implementiere hier die Merge-Logik!
     # Solange beide Listen noch Elemente haben:
     #     - Vergleiche die aktuellen Elemente der beiden Listen

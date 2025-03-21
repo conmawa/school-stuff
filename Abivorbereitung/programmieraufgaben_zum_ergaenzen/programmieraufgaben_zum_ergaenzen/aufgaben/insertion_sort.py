@@ -11,6 +11,9 @@ def insertion_sort(liste):
         schluessel = liste[i]  # Das aktuelle Element merken
         j = i - 1  # Index des vorherigen Elements
 
+        while liste[j] > schluessel and j >= 0:  # Solange das vorherige Element größer ist
+            liste[j + 1] = liste[j]
+            j -= 1
         # TODO: Implementiere hier die Verschiebe-Logik!
         # Solange das vorherige Element größer ist:
         #     - Schiebe das größere Element nach rechts

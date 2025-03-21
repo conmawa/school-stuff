@@ -37,15 +37,24 @@ class SchoolCurriculum:
 
         return None
 
-    def breadth_first_traversal(self):
+    def breadth_first_traversal(self, current = None):
         """Breitensuche: Gibt die gesamte Lehrplanstruktur aus."""
+        queue = []
+        if current is None:
+            queue.append(self.root)
+        
+        while queue:
+            current = queue.pop(0)
+            print(current.name, end=" ")
+            queue.extend(current.children)
+            
         # TODO: Implementiere hier die Breitensuche!
         # - Erstelle eine Warteschlange mit dem Wurzelknoten.
         # - Solange die Schlange nicht leer ist:
         #     - Entferne das erste Element
         #     - Gib seinen Namen aus
         #     - Füge alle Kinder dieses Knotens zur Schlange hinzu
-        print()
+        
 
 # Test: Aufbau eines Schul-Lehrplans
 schule = SchoolCurriculum("Gymnasium")
@@ -64,6 +73,7 @@ schule.insert("Datenbanken", "SQL Abfragen")
 print("Schul-Lehrplan (Breitensuche):")
 schule.breadth_first_traversal()  # Erwartete Ausgabe: Gymnasium Mathematik Informatik Algebra Geometrie Programmieren Datenbanken Lineare Gleichungen Dreiecke Python Grundlagen SQL Abfragen
 
+print()
 print("Suche nach 'Programmieren':", schule.search("Programmieren") is not None)  # Erwartete Ausgabe: True
 print("Suche nach 'Physik':", schule.search("Physik") is not None)  # Erwartete Ausgabe: False
 

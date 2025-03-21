@@ -25,7 +25,7 @@ class Main():
     
     def ausgeben(self):
         for eintrag in self.tiere:
-            print('Name: ', eintrag['Tier'].get_name(), '; Art: ',  eintrag['Tier'].get_art(), '; Gewicht: ', eintrag['Tier'].get_gewicht(), 'kg; Futterbedarf Fleisch: ', eintrag['Futterbedarf']['Fleisch'], 'kg; Futterbedarf Pflanzen: ', eintrag['Futterbedarf']['Pflanzen'], 'kg; Futterbedarf Fissch: ',eintrag['Futterbedarf']['Fisch'])
+            print('Name: ', eintrag['Tier'].get_name(), '; Art: ',  eintrag['Tier'].get_art(), '; Gewicht: ', eintrag['Tier'].get_gewicht(), 'kg; Futterbedarf Fleisch: ', eintrag['Futterbedarf']['Fleisch'], 'kg; Futterbedarf Pflanzen: ', eintrag['Futterbedarf']['Pflanzen'], 'kg; Futterbedarf Fisch: ',eintrag['Futterbedarf']['Fisch'], 'kg')
 
 zoo = Main()
 zoo.add_tier("Löwe", "Fleischfresser", 10)
