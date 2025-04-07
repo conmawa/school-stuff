@@ -40,7 +40,7 @@ lst = []
 zeiten = []
 
 while x < 40:
-    for i in range(50*z):
+    for i in range(100*z):
         lst.append(randint(0,1000))
     anzahl.append(len(lst))
     heap_sort(lst)
