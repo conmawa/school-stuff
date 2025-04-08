@@ -1,12 +1,9 @@
 from csv import *
 
 def count_elements(products, all_products):
-    anzahl = {}
-    for element in products:
-        anzahl[element] = all_products.count(element)
-    max_count = {}
-    max_count[element] = max(anzahl[element] for element in products)
-    return max_count
+    anzahl = {element: all_products.count(element) for element in products}
+    most_sold = max(anzahl, key=anzahl.get)
+    return {most_sold: anzahl[most_sold]}
     
 def main():
     with open('vorlage_c2-2.csv', newline = '') as csvfile:
@@ -38,6 +35,6 @@ def main():
     print('Anzahl der verkauften Produkte:', snacks_counter + drinks_counter)
     print('Anzahl der verkauften Snacks:', snacks_counter)
     print('Anzahl der verkauften Getränke:', drinks_counter)
-    print('Meist verkauftes Produkt:', most)
+    print('Meist verkauftes Produkt:', list(most)[0], 'mit', most[list(most)[0]], 'Verkäufen')
             
 main()

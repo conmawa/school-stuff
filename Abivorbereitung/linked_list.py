@@ -24,21 +24,26 @@ class LinkedList:
             current.nextNode = Node(data)
             
     def delete_at_start(self):
+        print('at start')
         if self.is_empty():
             print('Linked List is empty')
         else:
+            print(f'{self.head.data} was deleted')
             self.head = self.head.nextNode
     
     def delete_at_end(self):
+        print('at end')
         if self.is_empty():
             print('Linked List is empty')
         else:
             current = self.head
             while current.nextNode.nextNode:
                 current = current.nextNode
+            print(f'{current.nextNode.data} was deleted')
             current.nextNode = None
     
     def delete_in_middle(self, data):
+        print('in middle')
         if self.is_empty():
             print('Linked List is empty')
         else:
@@ -49,6 +54,7 @@ class LinkedList:
             
             while current:
                 if current.nextNode.data == data:
+                    print(f'{current.nextNode.data} was deleted')
                     current.nextNode = current.nextNode.nextNode
                     return
                 current = current.nextNode
@@ -81,15 +87,13 @@ print('new')
 ll.show()
 
 ll.delete_at_start()
-print('at start')
 ll.show()
 
 ll.delete_at_end()
-print('at end')
 ll.show()
 
 ll.delete_in_middle(5)
-print('in middle')
 ll.show()
 
 ll.search_number(0)
+ll.search_number(7)
